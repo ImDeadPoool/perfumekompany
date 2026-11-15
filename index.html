@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PERFUME KOMPANY | Royal Extrait De Parfum Atelier</title>
+  <meta name="description" content="Discover handcrafted luxury Extrait De Parfum by Perfume Kompany. High concentration, 12+ hours longevity, and artisanal notes. Experience Bleu Mist, 10000 Wishes, Paradoxe, and more.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="top-notice-bar" aria-label="Announcement">
+    <div class="ticker-content">
+      <span class="ticker-item">✦ COMPLIMENTARY EXPRESS DELIVERY ACROSS INDIA</span>
+      <span class="ticker-dot"></span>
+      <span class="ticker-item">✦ 2 FREE LUXURY ATELIER SAMPLES WITH EVERY BOTTLE</span>
+      <span class="ticker-dot"></span>
+      <span class="ticker-item">✦ HANDCRAFTED EXTRAIT DE PARFUM (35%+ OIL ESSENCE)</span>
+    </div>
+    <div class="notice-right">
+      <span>Concierge: +91 98765 43210</span>
+      <span>•</span>
+      <a href="https://instagram.com/perfume_kompany" target="_blank" rel="noopener">@perfume_kompany</a>
+    </div>
+  </aside>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header" id="main-header">
+    <div class="container header-inner">
+      <!-- Brand Logo -->
+      <a href="#hero" class="brand-logo-wrap">
+        <img src="assets/logo.jpg" alt="Perfume Kompany Monogram Logo" class="brand-logo-img">
+        <div class="brand-text-block">
+          <span class="brand-title">PERFUME KOMPANY</span>
+          <span class="brand-tagline">Haute Parfumerie Atelier</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="#hero" class="nav-link">Spotlight</a></li>
+          <li><a href="#unfolds" class="nav-link">Scent Progression</a></li>
+          <li><a href="#topshelf" class="nav-link">The Top Shelf</a></li>
+          <li><a href="#gallery" class="nav-link">Collections</a></li>
+          <li><a href="#boxbuilder" class="nav-link">Gift Box Builder</a></li>
+          <li><a href="#heritage" class="nav-link">Craftsmanship</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <button class="btn-scent-quiz open-scent-quiz-btn" aria-label="Open Fragrance Quiz">
+          <span>✨</span>
+          <span>Scent Finder</span>
+        </button>
+
+        <button class="btn-cart-bag" id="header-cart-btn" data-drop-zone="cart-bag" aria-label="Open Shopping Bag">
+          <span>Bag</span>
+          <span class="cart-counter" id="cart-badge-counter">0</span>
+        </button>
+
+        <button class="mobile-menu-btn" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION (Inspired Directly by Video) -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <!-- Left Hero Details -->
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span>✦</span>
+            <span>Extrait De Parfum • 35% Pure Oil Essence</span>
+          </div>
+
+          <h1 class="hero-title" id="hero-perfume-title">Bleu Mist</h1>
+          <p class="hero-subtitle" id="hero-perfume-subtitle">Fresh. Aquatic. Timeless.</p>
+          <p class="hero-description" id="hero-perfume-desc">
+            A refreshing blend of marine freshness, zesty citrus and aromatic herbs that settles into a smooth woody and musky base. Clean, confident and effortlessly versatile.
+          </p>
+
+          <!-- Olfactory Notes Bar -->
+          <div class="hero-notes-bar">
+            <div class="note-tag">
+              <strong>TOP:</strong>
+              <span id="hero-top-notes">Marine Accord, Citrus, Mint</span>
+            </div>
+            <div class="note-tag">
+              <strong>HEART:</strong>
+              <span id="hero-heart-notes">Lavender, Jasmine, Rosemary</span>
+            </div>
+            <div class="note-tag">
+              <strong>BASE:</strong>
+              <span id="hero-base-notes">Cedarwood, Sandalwood, Amber</span>
+            </div>
+          </div>
+
+          <!-- Controls: Size & Dynamic Price -->
+          <div class="hero-controls">
+            <div class="size-price-row">
+              <div class="size-selector">
+                <span class="size-label">Select Size:</span>
+                <button class="size-btn hero-size-btn" data-size="30ml">30 ML</button>
+                <button class="size-btn hero-size-btn active" data-size="50ml">50 ML</button>
+                <button class="size-btn hero-size-btn" data-size="100ml">100 ML</button>
+              </div>
+
+              <div class="price-display">
+                <span class="price-current" id="hero-price-display">₹2,199</span>
+                <span class="price-tax">Incl. all taxes • Free express shipping</span>
+              </div>
+            </div>
+
+            <!-- Action CTA Buttons -->
+            <div class="hero-actions">
+              <button class="btn-primary" id="hero-add-to-bag">
+                <span>+ Add to Bag</span>
+              </button>
+              <a href="#unfolds" class="btn-secondary">
+                <span>Explore Scent Journey ↓</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual Showcase with Arch & Floating Badges -->
+        <div class="hero-visual-wrap">
+          <div class="hero-bottle-podium" data-drop-zone="hero-podium">
+            <div class="drag-hint-pill">✦ Drag Bottle to Stages or Gift Box ✦</div>
+            <div class="bottle-glow-halo"></div>
+            <img src="assets/bleu-mist.jpg" alt="Featured Fragrance" class="hero-featured-img draggable-bottle" id="hero-featured-image">
+
+            <!-- Floating Note Badge Left -->
+            <div class="floating-badge badge-top-left">
+              <span class="badge-icon">🌊</span>
+              <div>
+                <p class="badge-title">First Impression</p>
+                <p class="badge-value">Sparkling Marine Rush</p>
+              </div>
+            </div>
+
+            <!-- Floating Note Badge Right -->
+            <div class="floating-badge badge-bottom-right">
+              <span class="badge-icon">⏳</span>
+              <div>
+                <p class="badge-title">Longevity</p>
+                <p class="badge-value" id="hero-badge-longevity">10–12+ Hours</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Fragrance Switcher Carousel Dock Under Hero -->
+      <div class="container">
+        <div class="fragrance-switcher-bar" id="fragrance-switcher-container">
+          <!-- Populated by app.js with thumbnails -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST & CRAFTSMANSHIP RIBBON -->
+    <section class="trust-ribbon">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon-box">⚜️</div>
+          <div class="trust-text">
+            <h4>Extrait Concentration</h4>
+            <p>35%+ oil strength for unmatched 12+ hour sillage</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon-box">🌿</div>
+          <div class="trust-text">
+            <h4>Artisanal Matured</h4>
+            <p>Hand-poured and cold-macerated in small batches</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon-box">🎁</div>
+          <div class="trust-text">
+            <h4>Complimentary Samples</h4>
+            <p>2 curated 5ml discovery vials with every order</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon-box">⚡</div>
+          <div class="trust-text">
+            <h4>Express Safe Transit</h4>
+            <p>Insured temperature-controlled courier pan-India</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SECTION 1: "HOW IT UNFOLDS ON YOUR SKIN" (Directly from Video) -->
+    <section class="section-padding unfolds-section" id="unfolds">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">The Olfactory Journey</span>
+          <h2 class="section-title">How it unfolds <em>on your skin</em></h2>
+          <p class="section-desc">
+            A masterfully composed Extrait De Parfum is alive. As your natural body warmth activates the oils, the fragrance tells a three-act sensory story over 12+ hours.
+          </p>
+        </div>
+
+        <!-- Fragrance Picker for Scent Progression -->
+        <div class="unfolds-selector-strip" id="unfolds-selector">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Interactive 3-Stage Container -->
+        <div class="unfolds-stage-container">
+          <!-- Stage 1: Opening (Top Notes) -->
+          <div class="unfolds-stage-card active" data-stage="opening" data-drop-zone="stage-opening">
+            <span class="stage-time-badge">⏱️ 00:00 - 15m</span>
+            <h3 class="stage-title">The Opening</h3>
+            <p class="stage-notes">Marine Accord, Citrus, Mint</p>
+            <p class="stage-desc">
+              The vibrant opening notes announce your presence with luminous, crisp projection that fills the immediate air.
+            </p>
+            <span class="drop-prompt">✦ Drop bottle here to preview opening ✦</span>
+          </div>
+
+          <!-- Centered Bottle with Glow -->
+          <div class="unfolds-bottle-center" data-drop-zone="unfolds-center">
+            <div class="drag-hint-pill">✦ Drag Bottle Into Stages Below ✦</div>
+            <img src="assets/bleu-mist.jpg" alt="Fragrance Scent Unfolding" class="unfolds-center-image draggable-bottle" id="unfolds-bottle-image">
+          </div>
+
+          <!-- Stage 2 & 3: Heart & Base -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="unfolds-stage-card" data-stage="heart" data-drop-zone="stage-heart">
+              <span class="stage-time-badge">⏱️ 30m - 2h</span>
+              <h3 class="stage-title">The Heart</h3>
+              <p class="stage-notes">Lavender, Jasmine, Rosemary</p>
+              <p class="stage-desc">
+                The soul of the fragrance warms on your pulse points, revealing smooth, royal florals and aromatic elegance.
+              </p>
+              <span class="drop-prompt">✦ Drop bottle here to preview heart ✦</span>
+            </div>
+
+            <div class="unfolds-stage-card" data-stage="base" data-drop-zone="stage-base">
+              <span class="stage-time-badge">⏱️ 4h - 12h+</span>
+              <h3 class="stage-title">The Dry Down</h3>
+              <p class="stage-notes">Cedarwood, Sandalwood, Amber</p>
+              <p class="stage-desc">
+                Rich woods, warm amber, and velvety musk melt into your skin chemistry, creating an unforgettable signature trail.
+              </p>
+              <span class="drop-prompt">✦ Drop bottle here to preview dry down ✦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SECTION 2: "THE TOP SHELF" (Bestseller Ranking & Live Preview from Video) -->
+    <section class="section-padding topshelf-section" id="topshelf">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Most Loved This Season</span>
+          <h2 class="section-title">The Top <em>Shelf</em></h2>
+          <p class="section-desc">
+            Explore our five flagship extrait formulations ranked by our private client collectors. Hover or click to preview.
+          </p>
+        </div>
+
+        <div class="topshelf-grid">
+          <!-- Left: Ranked List -->
+          <div class="ranking-list" id="topshelf-ranking-list">
+            <!-- Rendered by app.js -->
+          </div>
+
+          <!-- Right: Dynamic Live Preview Card -->
+          <div class="topshelf-preview-card">
+            <span class="preview-badge">✦ Connoisseur Choice</span>
+            <div class="preview-image-wrap">
+              <img src="assets/10000-wishes.jpg" alt="Selected Perfume" class="preview-bottle-img" id="topshelf-preview-img">
+            </div>
+
+            <h3 class="preview-perfume-name" id="topshelf-preview-name">10000 Wishes</h3>
+            <p class="preview-perfume-sub" id="topshelf-preview-sub">Warm Amber • Gourmand • 12–14h Longevity</p>
+
+            <div class="preview-notes-summary" id="topshelf-preview-pills">
+              <!-- Notes pills -->
+            </div>
+
+            <div class="preview-bottom-action">
+              <div>
+                <span style="font-size: 0.72rem; color: var(--text-muted); display: block;">50 ML Extrait</span>
+                <span style="font-family: var(--font-serif); font-size: 1.4rem; font-weight: 600;" id="topshelf-preview-price">₹2,499</span>
+              </div>
+              <button class="btn-primary" id="topshelf-preview-add" style="padding: 12px 24px; font-size: 0.8rem;">
+                + Add to Bag
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SECTION 3: "FIND THE ONE THAT FEELS LIKE YOU" (Arched Gallery & Category Filters) -->
+    <section class="section-padding gallery-section" id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">The Full Atelier</span>
+          <h2 class="section-title">Find the one that <em>feels like you</em></h2>
+          <p class="section-desc">
+            Handcrafted with 35% pure fragrance oil and knurled royal gold caps. Each creation tells a unique story.
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="gallery-tabs">
+          <button class="gallery-tab-btn active" data-category="all">All Scents (5)</button>
+          <button class="gallery-tab-btn" data-category="aquatic">Aquatic & Fresh</button>
+          <button class="gallery-tab-btn" data-category="gourmand">Warm & Amber</button>
+          <button class="gallery-tab-btn" data-category="oriental">Emerald & Oriental</button>
+          <button class="gallery-tab-btn" data-category="spicy">Spicy & Leather</button>
+          <button class="gallery-tab-btn" data-category="floral">Floral Opulence</button>
+        </div>
+
+        <!-- Arched Card Grid -->
+        <div class="gallery-grid" id="fragrance-gallery-grid">
+          <!-- Rendered by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SECTION 4: "BUILD A BOX THEY WILL REMEMBER" (Discovery Gift Box Builder from Video) -->
+    <section class="section-padding box-builder-section" id="boxbuilder">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">The Bespoke Gift Atelier</span>
+          <h2 class="section-title">Build a box they <em>will remember</em></h2>
+          <p class="section-desc">
+            Curate your own bespoke 3-bottle discovery set (3 x 20ml Extrait). Encased in our matte black & gold gift casket with a personalized handwritten note.
+          </p>
+        </div>
+
+        <div class="builder-layout">
+          <!-- Left: Visual Gift Box Simulation -->
+          <div class="box-visual-wrap">
+            <div class="gift-box-frame" data-drop-zone="gift-box">
+              <div class="gift-box-header">PERFUME KOMPANY • BESPOKE COFFRET</div>
+              <p style="font-size: 0.72rem; color: var(--gold-light); text-align: center; margin-bottom: 12px; letter-spacing: 0.08em;">✦ DRAG & DROP BOTTLES HERE TO FILL SLOTS ✦</p>
+              <div class="box-slots-row" id="box-slots-row">
+                <!-- 3 Interactive Slots -->
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="section-label" style="margin: 0; font-size: 0.7rem;" id="box-filled-count">0/3 Selected</span>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Includes royal wax-sealed presentation box</p>
+              </div>
+              <span style="font-family: var(--font-serif); font-size: 1.6rem; font-weight: 600;">₹2,999</span>
+            </div>
+          </div>
+
+          <!-- Right: Builder Controls & Picker Tray -->
+          <div class="builder-controls-wrap">
+            <div>
+              <p class="builder-step-label">Step 1 • Choose 3 Fragrances For Your Box</p>
+              <div class="perfume-picker-tray" id="box-picker-tray" style="margin-top: 14px;">
+                <!-- Populated by app.js -->
+              </div>
+            </div>
+
+            <!-- Step 2: Personalized Engraving / Message -->
+            <div class="engraving-box">
+              <label for="box-engraving-input">Step 2 • Complimentary Gift Note / Inscription</label>
+              <input type="text" id="box-engraving-input" class="engraving-input" placeholder="e.g. For my brother, the visionary • Happy Birthday!" maxlength="60">
+              <span style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-top: 6px;">
+                Handwritten with golden ink on heavy parchment paper.
+              </span>
+            </div>
+
+            <button class="btn-primary" id="btn-add-box-to-bag" style="width: 100%;">
+              <span>+ Add Bespoke Box to Bag (₹2,999)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROYAL HERITAGE & CRAFTSMANSHIP (High Contrast Obsidian Section from Video) -->
+    <section class="heritage-section" id="heritage">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label" style="color: var(--gold-light);">Artisanal Heritage</span>
+          <h2 class="section-title">The Royal Craft <em>of Extraction</em></h2>
+          <p class="section-desc" style="color: var(--text-light-muted);">
+            Why our Extrait De Parfum formulations outlast standard department store fragrances.
+          </p>
+        </div>
+
+        <div class="heritage-grid">
+          <div class="heritage-card">
+            <span class="heritage-num">01 / CONCENTRATION</span>
+            <h3>35%+ Pure Perfume Oils</h3>
+            <p>
+              While standard Eau de Parfum carries only 15% fragrance oil, every bottle from Perfume Kompany is blended at over 35% oil strength, guaranteeing unmatched 12 to 14+ hours of opulent projection.
+            </p>
+          </div>
+
+          <div class="heritage-card">
+            <span class="heritage-num">02 / CRAFTSMANSHIP</span>
+            <h3>Small Batch Cold Maceration</h3>
+            <p>
+              Each formulation is hand-poured in India and allowed to age in darkness for a minimum of 45 days. This allows the natural botanicals, resinoids, and spices to marry into a velvety smooth olfactory melody.
+            </p>
+          </div>
+
+          <div class="heritage-card">
+            <span class="heritage-num">03 / ATELIER DETAILS</span>
+            <h3>Heavy Glass & Knurled Brass</h3>
+            <p>
+              Presented in custom Italian crystal flacons crowned with a knurled solid gold-finish brass cap. Designed to grace the finest dressers and preserve precious essential oils from UV degradation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VERIFIED REVIEWS ("Worn across India, loved everywhere") -->
+    <section class="section-padding reviews-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="rating-summary-pill">
+            <span>★★★★★</span>
+            <span>4.9 / 5 Average Rating from 1,420+ Clients</span>
+          </div>
+          <h2 class="section-title">Worn across India, <em>loved everywhere</em></h2>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "Bleu Mist is literally the finest aquatic I have ever worn. The sillage lasted right through my 10-hour workday and dinner. People in the elevator actually asked me what I was wearing!"
+            </p>
+            <div class="review-author-wrap">
+              <div>
+                <p class="author-name">Aditya Varma</p>
+                <p class="author-loc">Mumbai • Verified Buyer of Bleu Mist</p>
+              </div>
+              <span class="verified-tag">✓ Verified</span>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "10000 Wishes is sheer royalty in a bottle. The champagne and amber notes smell so expensive and addictive. My wife immediately confiscated the bottle for herself!"
+            </p>
+            <div class="review-author-wrap">
+              <div>
+                <p class="author-name">Rohan Singhania</p>
+                <p class="author-loc">New Delhi • Verified Buyer of 10000 Wishes</p>
+              </div>
+              <span class="verified-tag">✓ Verified</span>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "The custom gift box builder was so effortless. Delivered in 2 days to Bengaluru in immaculate packaging with wax seals. Perfume Kompany is truly in a league of its own."
+            </p>
+            <div class="review-author-wrap">
+              <div>
+                <p class="author-name">Meera Nair</p>
+                <p class="author-loc">Bengaluru • Verified Buyer of Bespoke Coffret</p>
+              </div>
+              <span class="verified-tag">✓ Verified</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand Info -->
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+            <img src="assets/logo.jpg" alt="PK Logo" style="width: 44px; height: 44px; border-radius: 8px; border: 1px solid var(--gold-primary);">
+            <h2 style="font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 0.15em; color: #fff;">PERFUME KOMPANY</h2>
+          </div>
+          <p>
+            India's bespoke Haute Parfumerie crafting pure Extrait De Parfum with unmatched concentration, longevity, and royal Indian botanicals.
+          </p>
+          <p style="margin-top: 14px; color: var(--gold-light); font-size: 0.8rem;">
+            Follow our journey: <a href="https://instagram.com/perfume_kompany" target="_blank" rel="noopener" style="text-decoration: underline;">@perfume_kompany</a>
+          </p>
+        </div>
+
+        <!-- Col 2: The Atelier -->
+        <div class="footer-col">
+          <h4>The Fragrances</h4>
+          <ul>
+            <li><a href="#hero">Bleu Mist (Aquatic)</a></li>
+            <li><a href="#topshelf">10000 Wishes (Amber)</a></li>
+            <li><a href="#gallery">Paradoxe (Oriental)</a></li>
+            <li><a href="#gallery">One Billion (Leather)</a></li>
+            <li><a href="#gallery">Eterna Flora (Floral)</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Concierge -->
+        <div class="footer-col">
+          <h4>Client Concierge</h4>
+          <ul>
+            <li><a href="https://wa.me/919876543210" target="_blank">Order via WhatsApp</a></li>
+            <li><a href="#boxbuilder">Bespoke Discovery Sets</a></li>
+            <li><a href="javascript:void(0)" class="open-scent-quiz-btn">Olfactory Quiz</a></li>
+            <li><a href="#heritage">Authenticity & Oil Strength</a></li>
+            <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Newsletter -->
+        <div class="footer-col">
+          <h4>The Scent Gazette</h4>
+          <p style="font-size: 0.82rem; color: var(--text-light-muted); line-height: 1.5;">
+            Join our private members club for early access to small batch launches and private invitations.
+          </p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Welcome to the Perfume Kompany Gazette!');">
+            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+            <button type="submit" class="newsletter-btn">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 PERFUME KOMPANY. All rights reserved. Handcrafted in India.</p>
+        <p>100% Extrait De Parfum Concentration • Authentic Luxury Guaranteed</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING QUICK-ACTION BOTTOM DOCK (Directly from Video) -->
+  <aside class="floating-bottom-dock" id="floating-bottom-dock" data-drop-zone="cart-dock">
+    <div class="dock-item-info">
+      <img src="assets/bleu-mist.jpg" alt="Selected Perfume" class="dock-thumb" id="dock-thumb-img">
+      <div class="dock-meta">
+        <span class="dock-title" id="dock-perfume-title">Bleu Mist</span>
+        <span class="dock-sub" id="dock-perfume-sub">Extrait De Parfum • 50 ML</span>
+      </div>
+    </div>
+
+    <span class="dock-price" id="dock-perfume-price">₹2,199</span>
+
+    <div class="dock-actions">
+      <button class="btn-dock-add" id="dock-add-btn">+ Add to Bag</button>
+      <button class="btn-dock-whatsapp" id="dock-whatsapp-btn">
+        <span>💬 Order WhatsApp</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- SLIDE-OUT CART DRAWER -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>YOUR ATELIER BAG</h3>
+      <button class="cart-close-btn" id="cart-close-btn" aria-label="Close Bag">✕</button>
+    </div>
+
+    <div class="cart-free-shipping-progress">
+      ✦ Complimentary Express Shipping Applied Pan-India
+    </div>
+
+    <div class="cart-items-container" id="cart-items-container">
+      <!-- Items dynamically populated -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Subtotal:</span>
+        <span id="cart-subtotal-price">₹0</span>
+      </div>
+
+      <div class="cart-checkout-actions">
+        <button class="btn-primary" id="cart-whatsapp-order-btn" style="background: #25d366; color: #fff;">
+          <span>💬 Complete Order on WhatsApp</span>
+        </button>
+        <p style="font-size: 0.72rem; color: var(--text-muted); text-align: center; margin-top: 4px;">
+          Direct connection with our master perfumer concierge.
+        </p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- INTERACTIVE SCENT QUIZ MODAL -->
+  <div class="quiz-modal-overlay" id="quiz-modal-overlay">
+    <div class="quiz-modal">
+      <button class="quiz-close-btn" id="quiz-close-btn" aria-label="Close Quiz">✕</button>
+      <div id="quiz-modal-body">
+        <!-- Rendered by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
