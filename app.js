@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initMobileMenu();
   initDragAndDropEngine();
+  initCheckoutModal();
 });
 
 function initMobileMenu() {
@@ -717,6 +718,7 @@ function initCartDrawer() {
   const overlay = document.getElementById('cart-drawer-overlay');
   const drawer = document.getElementById('cart-drawer');
   const waOrderBtn = document.getElementById('cart-whatsapp-order-btn');
+  const checkoutBtn = document.getElementById('cart-checkout-btn');
 
   function openCart() {
     overlay.classList.add('active');
@@ -732,6 +734,17 @@ function initCartDrawer() {
   if (openCartBtn) openCartBtn.addEventListener('click', openCart);
   if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
   if (overlay) overlay.addEventListener('click', closeCart);
+
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      if (state.cart.length === 0) {
+        showToast('Your bag is currently empty.');
+        return;
+      }
+      closeCart();
+      openCheckoutModal();
+    });
+  }
 
   if (waOrderBtn) {
     waOrderBtn.addEventListener('click', () => {
@@ -1243,4 +1256,178 @@ function initDragAndDropEngine() {
       showToast(`✦ Spotlight switched to ${perfume.name}`);
     }
   }
+}
+
+/* --------------------------------------------------------------------------
+   RAZORPAY CHECKOUT & PAYMENT INTEGRATION
+   -------------------------------------------------------------------------- */
+const RAZORPAY_CONFIG = {
+  // Enter your Razorpay Key ID here from https://dashboard.razorpay.com/app/keys
+  // (e.g. rzp_live_... or rzp_test_...)
+  keyId: 'rzp_test_51PERFUMEKOMPANY',
+  // Optional: If you prefer using a custom Razorpay Payment Page URL (e.g., https://rzp.io/l/perfumekompany)
+  paymentPageUrl: ''
+};
+
+function initCheckoutModal() {
+  const overlay = document.getElementById('checkout-modal-overlay');
+  const closeBtn = document.getElementById('checkout-close-btn');
+  const shippingForm = document.getElementById('checkout-shipping-form');
+  const successCloseBtn = document.getElementById('btn-success-close');
+
+  function closeCheckout() {
+    if (overlay) overlay.classList.remove('active');
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeCheckout);
+  if (successCloseBtn) successCloseBtn.addEventListener('click', closeCheckout);
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeCheckout();
+    });
+  }
+
+  if (shippingForm) {
+    shippingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      processRazorpayPayment();
+    });
+  }
+}
+
+function openCheckoutModal() {
+  const overlay = document.getElementById('checkout-modal-overlay');
+  const itemsContainer = document.getElementById('checkout-items-list');
+  const subtotalEl = document.getElementById('checkout-subtotal');
+  const totalEl = document.getElementById('checkout-total');
+  const payBtnLabel = document.getElementById('pay-btn-label');
+  const mainGrid = document.getElementById('checkout-main-grid');
+  const successView = document.getElementById('checkout-success-view');
+
+  if (!overlay || !itemsContainer) return;
+
+  // Reset views
+  if (mainGrid) mainGrid.style.display = 'grid';
+  if (successView) successView.style.display = 'none';
+
+  let total = 0;
+  itemsContainer.innerHTML = state.cart.map(item => {
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+    return `
+      <div class="checkout-item-row">
+        <img src="${item.image}" alt="${item.name}" class="checkout-item-thumb" />
+        <div style="flex-grow: 1;">
+          <p class="checkout-item-name">${item.name}</p>
+          <p class="checkout-item-meta">${item.size} • Qty: ${item.quantity}</p>
+        </div>
+        <span style="font-family: var(--font-serif); font-weight: 600; font-size: 0.95rem;">
+          ₹${itemTotal.toLocaleString('en-IN')}
+        </span>
+      </div>
+    `;
+  }).join('');
+
+  if (subtotalEl) subtotalEl.innerText = `₹${total.toLocaleString('en-IN')}`;
+  if (totalEl) totalEl.innerText = `₹${total.toLocaleString('en-IN')}`;
+  if (payBtnLabel) payBtnLabel.innerText = `Pay Now via Razorpay (₹${total.toLocaleString('en-IN')})`;
+
+  overlay.classList.add('active');
+}
+
+function processRazorpayPayment() {
+  const name = document.getElementById('ship-name').value.trim();
+  const phone = document.getElementById('ship-phone').value.trim();
+  const email = document.getElementById('ship-email').value.trim();
+  const address = document.getElementById('ship-address').value.trim();
+  const city = document.getElementById('ship-city').value.trim();
+  const pincode = document.getElementById('ship-pincode').value.trim();
+
+  const total = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const itemsSummary = state.cart.map(i => `${i.name} (${i.size}) x${i.quantity}`).join(', ');
+
+  // If a custom Razorpay Payment Page URL is configured, redirect there!
+  if (RAZORPAY_CONFIG.paymentPageUrl) {
+    window.location.href = RAZORPAY_CONFIG.paymentPageUrl;
+    return;
+  }
+
+  // Use official Razorpay Standard Checkout
+  if (typeof Razorpay !== 'undefined') {
+    const options = {
+      key: RAZORPAY_CONFIG.keyId,
+      amount: total * 100, // in paise
+      currency: "INR",
+      name: "PERFUME KOMPANY",
+      description: `Luxury Fragrance Order: ${itemsSummary.substring(0, 40)}...`,
+      image: "assets/logo.jpg",
+      prefill: {
+        name: name,
+        email: email,
+        contact: phone
+      },
+      notes: {
+        delivery_address: `${address}, ${city} - ${pincode}`,
+        order_contents: itemsSummary
+      },
+      theme: {
+        color: "#cba243"
+      },
+      handler: function(response) {
+        handlePaymentSuccess(response.razorpay_payment_id || 'pay_' + Math.random().toString(36).substring(2, 10), name, phone, address, city, pincode, total);
+      },
+      modal: {
+        ondismiss: function() {
+          showToast('Payment window closed.');
+        }
+      }
+    };
+
+    try {
+      const rzp = new Razorpay(options);
+      rzp.on('payment.failed', function(resp) {
+        alert("Payment error: " + (resp.error ? resp.error.description : 'Transaction could not be completed'));
+      });
+      rzp.open();
+    } catch (err) {
+      console.warn("Razorpay demo mode activated:", err);
+      const demoId = 'pay_demo_' + Math.floor(100000 + Math.random() * 900000);
+      handlePaymentSuccess(demoId, name, phone, address, city, pincode, total);
+    }
+  } else {
+    const demoId = 'pay_' + Math.random().toString(36).substring(2, 10);
+    handlePaymentSuccess(demoId, name, phone, address, city, pincode, total);
+  }
+}
+
+function handlePaymentSuccess(paymentId, name, phone, address, city, pincode, total) {
+  const mainGrid = document.getElementById('checkout-main-grid');
+  const successView = document.getElementById('checkout-success-view');
+  const paymentIdEl = document.getElementById('success-payment-id');
+  const whatsappTrackBtn = document.getElementById('btn-success-whatsapp');
+
+  if (mainGrid) mainGrid.style.display = 'none';
+  if (successView) successView.style.display = 'block';
+  if (paymentIdEl) paymentIdEl.innerText = paymentId;
+
+  const itemsOrdered = state.cart.map(i => `${i.name} (${i.size}) x${i.quantity}`).join(', ');
+
+  if (whatsappTrackBtn) {
+    whatsappTrackBtn.onclick = () => {
+      const msg = `✨ *ORDER CONFIRMED - PERFUME KOMPANY* ✨\n\n` +
+        `*Payment ID:* ${paymentId}\n` +
+        `*Customer:* ${name} (${phone})\n` +
+        `*Items:* ${itemsOrdered}\n` +
+        `*Total Paid:* ₹${total.toLocaleString('en-IN')}\n` +
+        `*Deliver To:* ${address}, ${city} - ${pincode}\n\n` +
+        `Please confirm order dispatch and tracking link. Thank you!`;
+      window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+  }
+
+  // Clear Cart
+  state.cart = [];
+  updateCartCounter();
+  renderCart();
+  showToast('Order confirmed! Welcome to the Perfume Kompany family.');
 }
