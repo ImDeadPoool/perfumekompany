@@ -220,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initDragAndDropEngine();
   initCheckoutModal();
+  initSalesProofEngine();
 });
 
 function initMobileMenu() {
@@ -1445,4 +1446,81 @@ function handlePaymentSuccess(paymentId, name, phone, address, city, pincode, to
   updateCartCounter();
   renderCart();
   showToast('Order confirmed! Welcome to the Perfume Kompany family.');
+}
+
+/* --------------------------------------------------------------------------
+   LIVE SOCIAL PROOF RECENT SALES ENGINE
+   -------------------------------------------------------------------------- */
+const RECENT_SALES = [
+  { name: 'Aditi V.', city: 'Mumbai', perfumeId: '10000-wishes', size: '50 ML', time: '3 minutes ago' },
+  { name: 'Karan S.', city: 'Bengaluru', perfumeId: 'bleu-mist', size: '100 ML', time: '6 minutes ago' },
+  { name: 'Rhea D.', city: 'New Delhi', perfumeId: 'paradoxe', size: '50 ML', time: '11 minutes ago' },
+  { name: 'Vikram R.', city: 'Hyderabad', perfumeId: 'one-billion', size: '50 ML', time: '17 minutes ago' },
+  { name: 'Sneha P.', city: 'Kochi', perfumeId: 'eterna-flora', size: '100 ML', time: '23 minutes ago' },
+  { name: 'Aman G.', city: 'Pune', perfumeId: '10000-wishes', size: '30 ML', time: '29 minutes ago' }
+];
+
+function initSalesProofEngine() {
+  const toast = document.getElementById('sales-toast');
+  const closeBtn = document.getElementById('sales-toast-close');
+  if (!toast) return;
+
+  let currentIndex = 0;
+  let isPaused = false;
+  let isDismissed = false;
+
+  function showNextSale() {
+    if (isDismissed || isPaused) return;
+
+    const sale = RECENT_SALES[currentIndex];
+    const perfume = PERFUMES.find(p => p.id === sale.perfumeId) || PERFUMES[0];
+
+    const thumbEl = document.getElementById('sales-toast-thumb');
+    const nameEl = document.getElementById('sales-toast-name');
+    const cityEl = document.getElementById('sales-toast-city');
+    const perfumeEl = document.getElementById('sales-toast-perfume');
+    const timeEl = document.getElementById('sales-toast-time');
+
+    if (thumbEl) thumbEl.src = perfume.image;
+    if (nameEl) nameEl.innerText = sale.name;
+    if (cityEl) cityEl.innerText = sale.city;
+    if (perfumeEl) perfumeEl.innerText = `Purchased ${perfume.name} (${sale.size})`;
+    if (timeEl) timeEl.innerText = sale.time;
+
+    toast.classList.add('active');
+
+    // Automatically hide after 5.5 seconds
+    setTimeout(() => {
+      toast.classList.remove('active');
+      currentIndex = (currentIndex + 1) % RECENT_SALES.length;
+    }, 5500);
+  }
+
+  // Initial trigger after 4 seconds
+  setTimeout(() => {
+    showNextSale();
+    // Then recurring every 15 seconds
+    setInterval(showNextSale, 15000);
+  }, 4000);
+
+  // Pause popup when customer hovers over it to read
+  toast.addEventListener('mouseenter', () => isPaused = true);
+  toast.addEventListener('mouseleave', () => isPaused = false);
+
+  // Dismiss button
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toast.classList.remove('active');
+      isDismissed = true;
+    });
+  }
+
+  // Clicking on popup smoothly scrolls to the collection gallery
+  toast.addEventListener('click', () => {
+    const galleryEl = document.getElementById('gallery');
+    if (galleryEl) {
+      galleryEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 }
