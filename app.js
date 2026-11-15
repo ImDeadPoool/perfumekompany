@@ -1452,11 +1452,16 @@ function handlePaymentSuccess(paymentId, name, phone, address, city, pincode, to
    LIVE SOCIAL PROOF RECENT SALES ENGINE
    -------------------------------------------------------------------------- */
 const RECENT_SALES = [
-  { name: 'Pooja M.', perfumeId: '10000-wishes', time: '14 minutes ago' },
-  { name: 'Karan S.', perfumeId: 'bleu-mist', time: '28 minutes ago' },
-  { name: 'Rhea D.', perfumeId: 'paradoxe', time: '42 minutes ago' },
-  { name: 'Vikram R.', perfumeId: 'one-billion', time: '55 minutes ago' },
-  { name: 'Sneha P.', perfumeId: 'eterna-flora', time: '1 hour ago' }
+  { name: 'Fathima N.', city: 'Kozhikode', perfumeId: '10000-wishes', time: '12 minutes ago' },
+  { name: 'Rahul Menon', city: 'Kochi', perfumeId: 'bleu-mist', time: '24 minutes ago' },
+  { name: 'Anjali Nair', city: 'Trivandrum', perfumeId: 'eterna-flora', time: '38 minutes ago' },
+  { name: 'Mohammed Basil', city: 'Malappuram', perfumeId: 'one-billion', time: '51 minutes ago' },
+  { name: 'Arjun K.', city: 'Bengaluru', perfumeId: 'bleu-mist', time: '1 hour ago' },
+  { name: 'Sandra Thomas', city: 'Kottayam', perfumeId: '10000-wishes', time: '1 hour ago' },
+  { name: 'Vishnu Prasad', city: 'Thrissur', perfumeId: 'paradoxe', time: '2 hours ago' },
+  { name: 'Divya R.', city: 'Coimbatore', perfumeId: 'eterna-flora', time: '2 hours ago' },
+  { name: 'Akhil Raj', city: 'Kannur', perfumeId: 'one-billion', time: '3 hours ago' },
+  { name: 'Nayana V.', city: 'Kollam', perfumeId: 'paradoxe', time: '3 hours ago' }
 ];
 
 function initSalesProofEngine() {
@@ -1480,7 +1485,7 @@ function initSalesProofEngine() {
     const timeEl = document.getElementById('sales-toast-time');
 
     if (thumbEl) thumbEl.src = perfume.image;
-    if (nameEl) nameEl.innerHTML = `<strong>${sale.name}</strong> purchased`;
+    if (nameEl) nameEl.innerHTML = `<strong>${sale.name}</strong> from ${sale.city} purchased`;
     if (perfumeEl) perfumeEl.innerText = perfume.name.toUpperCase();
     if (timeEl) timeEl.innerText = sale.time;
 
