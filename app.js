@@ -1036,12 +1036,14 @@ function initSmoothScroll() {
 function initDragAndDropEngine() {
   let dragState = {
     isDragging: false,
+    hasInitiated: false,
     perfume: null,
     ghostEl: null,
+    startX: 0,
+    startY: 0,
     lastX: 0,
     lastY: 0,
-    hoveredZone: null,
-    scrollTimer: null
+    hoveredZone: null
   };
 
   // Listen globally for pointerdown on any draggable bottle
@@ -1060,31 +1062,43 @@ function initDragAndDropEngine() {
 
     const perfume = PERFUMES.find(p => p.id === perfumeId) || state.activeHeroPerfume;
 
-    // Start dragging
-    dragState.isDragging = true;
+    // Track initial touch coordinates (wait for threshold before capturing scroll)
+    dragState.hasInitiated = true;
+    dragState.isDragging = false;
     dragState.perfume = perfume;
+    dragState.startX = e.clientX;
+    dragState.startY = e.clientY;
     dragState.lastX = e.clientX;
     dragState.lastY = e.clientY;
-
-    // Create ghost image that follows cursor
-    const ghost = document.createElement('div');
-    ghost.className = 'bottle-drag-ghost';
-    ghost.innerHTML = `<img src="${perfume.image}" alt="${perfume.name}" />`;
-    document.body.appendChild(ghost);
-    dragState.ghostEl = ghost;
-
-    document.body.classList.add('is-dragging-active');
-    updateGhostPosition(e.clientX, e.clientY, 0);
-
-    // Prevent default touch scrolling while dragging bottle
-    if (e.pointerType === 'touch') {
-      e.preventDefault();
-    }
-  }, { passive: false });
+  });
 
   // Move handler
   document.addEventListener('pointermove', (e) => {
-    if (!dragState.isDragging || !dragState.ghostEl) return;
+    if (!dragState.hasInitiated) return;
+
+    // Check movement threshold (10px) to distinguish intentional drag from vertical scrolling
+    if (!dragState.isDragging) {
+      const dist = Math.hypot(e.clientX - dragState.startX, e.clientY - dragState.startY);
+      if (dist > 10) {
+        dragState.isDragging = true;
+
+        // Create ghost image that follows cursor
+        const ghost = document.createElement('div');
+        ghost.className = 'bottle-drag-ghost';
+        ghost.innerHTML = `<img src="${dragState.perfume.image}" alt="${dragState.perfume.name}" />`;
+        document.body.appendChild(ghost);
+        dragState.ghostEl = ghost;
+
+        document.body.classList.add('is-dragging-active');
+        updateGhostPosition(e.clientX, e.clientY, 0);
+      } else {
+        return;
+      }
+    }
+
+    if (e.cancelable && e.pointerType === 'touch') {
+      e.preventDefault();
+    }
 
     const deltaX = e.clientX - dragState.lastX;
     dragState.lastX = e.clientX;
@@ -1106,7 +1120,6 @@ function initDragAndDropEngine() {
       }
       if (hoveredZone) {
         hoveredZone.classList.add('drop-zone-hovered');
-        // Visual vibration / micro feedback
         if (navigator.vibrate) navigator.vibrate(15);
       }
       dragState.hoveredZone = hoveredZone;
@@ -1115,6 +1128,7 @@ function initDragAndDropEngine() {
 
   // Drop / release handler
   document.addEventListener('pointerup', (e) => {
+    dragState.hasInitiated = false;
     if (!dragState.isDragging) return;
 
     const dropZone = dragState.hoveredZone || findDropZoneAtPoint(e.clientX, e.clientY);
@@ -1146,6 +1160,7 @@ function initDragAndDropEngine() {
 
   // Cancel handler
   document.addEventListener('pointercancel', () => {
+    dragState.hasInitiated = false;
     if (!dragState.isDragging) return;
     if (dragState.ghostEl) dragState.ghostEl.remove();
     dragState.isDragging = false;
