@@ -12,7 +12,117 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3.0">
+
+  <!-- Embedded Critical Styles for Sales Notification Popup -->
+  <style>
+    #sales-toast {
+      position: fixed !important;
+      bottom: 28px !important;
+      left: 28px !important;
+      z-index: 9999 !important;
+      background: #ffffff !important;
+      border-radius: 12px !important;
+      padding: 10px 34px 10px 12px !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      max-width: 320px !important;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
+      transform: translateY(120px) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease, visibility 0.45s !important;
+      cursor: pointer !important;
+    }
+
+    #sales-toast.active {
+      transform: translateY(0) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+    }
+
+    .sales-toast-thumb {
+      width: 46px !important;
+      height: 46px !important;
+      border-radius: 8px !important;
+      object-fit: cover !important;
+      background: #0d0d12 !important;
+      flex-shrink: 0 !important;
+      border: 1px solid rgba(203, 162, 67, 0.4) !important;
+    }
+
+    .sales-toast-content {
+      display: flex !important;
+      flex-direction: column !important;
+      text-align: left !important;
+    }
+
+    .sales-toast-buyer {
+      font-size: 13px !important;
+      color: #222222 !important;
+      line-height: 1.2 !important;
+      margin: 0 !important;
+    }
+
+    .sales-toast-buyer strong {
+      font-weight: 700 !important;
+      color: #111111 !important;
+    }
+
+    .sales-toast-perfume {
+      font-size: 13.5px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.03em !important;
+      text-transform: uppercase !important;
+      color: #000000 !important;
+      margin: 2px 0 !important;
+      line-height: 1.2 !important;
+    }
+
+    .sales-toast-time {
+      font-size: 11px !important;
+      color: #777777 !important;
+      margin: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 5px !important;
+    }
+
+    .sales-toast-badge {
+      color: #10b981 !important;
+      font-weight: 600 !important;
+    }
+
+    .sales-toast-close {
+      position: absolute !important;
+      top: 6px !important;
+      right: 10px !important;
+      font-size: 13px !important;
+      color: #999999 !important;
+      background: none !important;
+      border: none !important;
+      cursor: pointer !important;
+      padding: 4px !important;
+      line-height: 1 !important;
+    }
+
+    .sales-toast-close:hover {
+      color: #000000 !important;
+    }
+
+    @media (max-width: 768px) {
+      #sales-toast {
+        bottom: 84px !important;
+        left: 14px !important;
+        max-width: calc(100% - 28px) !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -579,14 +689,9 @@
     <button class="sales-toast-close" id="sales-toast-close" aria-label="Dismiss">✕</button>
     <img src="assets/10000-wishes.jpg" alt="Recent Purchase" class="sales-toast-thumb" id="sales-toast-thumb">
     <div class="sales-toast-content">
-      <p class="sales-toast-buyer">
-        <strong id="sales-toast-name">Aditi V.</strong> from <span id="sales-toast-city">Mumbai</span>
-      </p>
-      <p class="sales-toast-perfume" id="sales-toast-perfume">Purchased 10000 Wishes (50 ML)</p>
-      <p class="sales-toast-time">
-        <span id="sales-toast-time">3 minutes ago</span>
-        <span class="sales-toast-badge">✓ Verified Order</span>
-      </p>
+      <p class="sales-toast-buyer" id="sales-toast-name"><strong>Pooja M.</strong> purchased</p>
+      <p class="sales-toast-perfume" id="sales-toast-perfume">10000 WISHES</p>
+      <p class="sales-toast-time" id="sales-toast-time">14 minutes ago</p>
     </div>
   </aside>
 
@@ -764,6 +869,6 @@
 
   <!-- Scripts -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=3.0"></script>
 </body>
 </html>

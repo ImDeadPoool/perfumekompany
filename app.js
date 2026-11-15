@@ -1452,12 +1452,11 @@ function handlePaymentSuccess(paymentId, name, phone, address, city, pincode, to
    LIVE SOCIAL PROOF RECENT SALES ENGINE
    -------------------------------------------------------------------------- */
 const RECENT_SALES = [
-  { name: 'Aditi V.', city: 'Mumbai', perfumeId: '10000-wishes', size: '50 ML', time: '3 minutes ago' },
-  { name: 'Karan S.', city: 'Bengaluru', perfumeId: 'bleu-mist', size: '100 ML', time: '6 minutes ago' },
-  { name: 'Rhea D.', city: 'New Delhi', perfumeId: 'paradoxe', size: '50 ML', time: '11 minutes ago' },
-  { name: 'Vikram R.', city: 'Hyderabad', perfumeId: 'one-billion', size: '50 ML', time: '17 minutes ago' },
-  { name: 'Sneha P.', city: 'Kochi', perfumeId: 'eterna-flora', size: '100 ML', time: '23 minutes ago' },
-  { name: 'Aman G.', city: 'Pune', perfumeId: '10000-wishes', size: '30 ML', time: '29 minutes ago' }
+  { name: 'Pooja M.', perfumeId: '10000-wishes', time: '14 minutes ago' },
+  { name: 'Karan S.', perfumeId: 'bleu-mist', time: '28 minutes ago' },
+  { name: 'Rhea D.', perfumeId: 'paradoxe', time: '42 minutes ago' },
+  { name: 'Vikram R.', perfumeId: 'one-billion', time: '55 minutes ago' },
+  { name: 'Sneha P.', perfumeId: 'eterna-flora', time: '1 hour ago' }
 ];
 
 function initSalesProofEngine() {
@@ -1477,16 +1476,15 @@ function initSalesProofEngine() {
 
     const thumbEl = document.getElementById('sales-toast-thumb');
     const nameEl = document.getElementById('sales-toast-name');
-    const cityEl = document.getElementById('sales-toast-city');
     const perfumeEl = document.getElementById('sales-toast-perfume');
     const timeEl = document.getElementById('sales-toast-time');
 
     if (thumbEl) thumbEl.src = perfume.image;
-    if (nameEl) nameEl.innerText = sale.name;
-    if (cityEl) cityEl.innerText = sale.city;
-    if (perfumeEl) perfumeEl.innerText = `Purchased ${perfume.name} (${sale.size})`;
+    if (nameEl) nameEl.innerHTML = `<strong>${sale.name}</strong> purchased`;
+    if (perfumeEl) perfumeEl.innerText = perfume.name.toUpperCase();
     if (timeEl) timeEl.innerText = sale.time;
 
+    // Show popup
     toast.classList.add('active');
 
     // Automatically hide after 5.5 seconds
@@ -1496,14 +1494,15 @@ function initSalesProofEngine() {
     }, 5500);
   }
 
-  // Initial trigger after 4 seconds
+  // Initial trigger after 6 seconds
   setTimeout(() => {
     showNextSale();
-    // Then recurring every 15 seconds
-    setInterval(showNextSale, 15000);
-  }, 4000);
 
-  // Pause popup when customer hovers over it to read
+    // Recurring trigger every 75 seconds (every ~1.25 minutes)
+    setInterval(showNextSale, 75000);
+  }, 6000);
+
+  // Pause popup when customer hovers over it
   toast.addEventListener('mouseenter', () => isPaused = true);
   toast.addEventListener('mouseleave', () => isPaused = false);
 
